@@ -13,7 +13,7 @@ Write-SpectreHost "You selected meeting [$accentColor]$($selectedMeeting.meeting
 $sessions = Get-F1MeetingSessions -MeetingKey $selectedMeeting.meeting_key
 
 Write-SpectreHost ""
-$sessions | Format-SpectreTable
+$sessions | Select-Object meeting_key, session_name, date_start, location | Format-SpectreTable
 
 Write-SpectreHost ""
 $selectedSession = Read-SpectreSelection -Title "What session are you interested in?" -Choices $sessions -ChoiceLabelProperty session_name
