@@ -6,17 +6,25 @@ Set-SpectreColors -AccentColor $accentColor
 Get-F1Logo | Format-SpectrePanel -Color White -Expand
 
 $meetings = Get-F1Meetings
-$selectedMeeting = Read-SpectreSelection -Message "What session are you interested in?" -Choices $meetings -ChoiceLabelProperty meeting_name
+Write-SpectreHost ""
+$selectedMeeting = Read-SpectreSelection -Title "What session are you interested in?" -Choices $meetings -ChoiceLabelProperty meeting_name
 
 Write-SpectreHost "You selected meeting [$accentColor]$($selectedMeeting.meeting_name)[/]."
 $sessions = Get-F1MeetingSessions -MeetingKey $selectedMeeting.meeting_key
+
+Write-SpectreHost ""
 $sessions | Format-SpectreTable
 
-$selectedSession = Read-SpectreSelection -Message "What session are you interested in?" -Choices $sessions -ChoiceLabelProperty session_name
+Write-SpectreHost ""
+$selectedSession = Read-SpectreSelection -Title "What session are you interested in?" -Choices $sessions -ChoiceLabelProperty session_name
 
 Write-SpectreHost "You selected session [$accentColor]$($selectedSession.session_name)[/] for meeting [$accentColor]$($selectedMeeting.meeting_name)[/]."
 
 $teams = Get-F1SessionDrivers -SessionKey 9488 $selectedSession.session_key | Group-Object -Property team_name
+
+Write-SpectreHost ""
+Write-SpectreRule "Race Details"
+Write-SpectreHost ""
 $drivers = $teams | ForEach-Object { $_.Group } | Sort-Object -Property full_name
 $teamsTree = @{
   Value = "Teams"
@@ -40,7 +48,8 @@ foreach ($team in $teams) {
 }
 $teamsTree | Format-SpectreTree -Color Grey35
 
-$selectedDriver = Read-SpectreSelection -Message "What driver are you interested in?" -Choices $drivers -ChoiceLabelProperty full_name -EnableSearch
+Write-SpectreHost ""
+$selectedDriver = Read-SpectreSelection -Title "What driver are you interested in?" -Choices $drivers -ChoiceLabelProperty full_name -EnableSearch
 
 Write-SpectreHost "You selected driver [$accentColor]$($selectedDriver.full_name)[/] for session [$accentColor]$($selectedSession.session_name)[/] in meeting [$accentColor]$($selectedMeeting.meeting_name)[/]."
 
@@ -72,7 +81,11 @@ $yOffset = $yLimits.Minimum * -1
 $xMax = $xLimits.Maximum + $xOffset
 $yMax = $yLimits.Maximum + $yOffset
 
-Read-SpectrePause -Message "Press [red]<ENTER>[/] to start live race data display."
+Write-SpectreHost ""
+$answer = Read-SpectreConfirm -Message "Start the live [red]race data[/] display?"
+if (!$answer) {
+  return
+}
 
 $rootLayout = New-SpectreLayout -Name "root" -Rows @(
   (New-SpectreLayout -Name "frame" -Data "empty" -Ratio 1 -MinimumSize 11),
@@ -192,7 +205,7 @@ function Get-GearRows {
   return @(
     "",
     "",
-    (Write-SpectreFigletText -Alignment Center -Text "$gear" -FigletFontPath ".\ansi-regular.flf" -PassThru),
+    (Write-SpectreFigletText -Alignment Center -Text "$gear" -FigletFontPath ".\assets\ansi-regular.flf" -PassThru),
     (Write-SpectreHost $drsLabel -Justify Center -PassThru)
   ) | Format-SpectreRows
 }

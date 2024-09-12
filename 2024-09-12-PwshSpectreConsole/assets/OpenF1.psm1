@@ -117,11 +117,13 @@ function Get-F1CachedApiResponse {
 
   $absoluteUrl = "$script:BaseUrl$Url"
 
-  if ($global:F1CachedApiResponses.ContainsKey($absoluteUrl)) {
-    return $global:F1CachedApiResponses[$absoluteUrl]
-  }
+  $response = Invoke-SpectreCommandWithStatus -Title "Fetching $Url" -Spinner Dots -ScriptBlock {
 
-  $response = Invoke-SpectreCommandWithStatus -Title "Fetching $Url" -ScriptBlock {
+    if ($global:F1CachedApiResponses.ContainsKey($absoluteUrl)) {
+      Start-Sleep -Seconds 3
+      return $global:F1CachedApiResponses[$absoluteUrl]
+    }
+
     $response = Invoke-RestMethod -Uri $absoluteUrl -Method Get
     if ($null -eq $response) {
       throw "Failed to fetch $absoluteUrl"

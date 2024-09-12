@@ -36,5 +36,15 @@ I 💖 PowerShell. All the power of C# without mucking around with build tools.
 I'm going to work through a few examples to demonstrate the capabilities of Spectre.Console and the PwshSpectreConsole module. We'll create a simple console application, add colors, tables, and progress bars, and explore the possibilities of building visually appealing console interfaces with PowerShell.
 
 What data can we use? [Formula One?](https://openf1.org/)  
+
 ![f1 logo pixels](./assets/f1.png)
 ![car go vroom](./assets/mclaren.png)
+
+- [ ] Get the data from the API in style https://api.openf1.org/v1/meetings?year=2024
+- [ ] Display the data in a table `Select-Object circuit_key, meeting_key, location, meeting_name`
+  - [ ] Console output, `Out-SpectreHost` vs `Out-Host`
+  - [ ] Assignment and embedding
+- [ ] Get some user input
+- [ ] Demo some visuals
+- [ ] Documentation
+- [ ] Question time
