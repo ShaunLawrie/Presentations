@@ -117,7 +117,7 @@ function Get-F1CachedApiResponse {
 
   $absoluteUrl = "$script:BaseUrl$Url"
 
-  $response = Invoke-SpectreCommandWithStatus -Title "Fetching $Url" -Spinner Dots -ScriptBlock {
+  $response = Invoke-SpectreCommandWithStatus -Title "Fetching $Url" -Spinner Aesthetic -ScriptBlock {
 
     if ($global:F1CachedApiResponses.ContainsKey($absoluteUrl)) {
       Start-Sleep -Seconds 3
