@@ -5,8 +5,9 @@ This demo will show how to generate a documentation website using PowerShell and
 ## Demo Overview
 
 > **Scenario**  
-> TBD
+> We're going to be demonstrating how to create a documentation website for a PowerShell module using Microsoft.PowerShell.PlatyPS, Charmbracelet.VHS and Astro Starlight.
 
-1. TBD
-2. TBD
-3. TBD
+1. Walk through UpdateDocs.1.ps1 explaining the steps and demonstrating them in the terminal.
+2. Show the Astro site.
+3. Show VHS and how it works.
+4. Walk through the changes in UpdateDocs.2.ps1, explaining the changes made to enable the recordings.
