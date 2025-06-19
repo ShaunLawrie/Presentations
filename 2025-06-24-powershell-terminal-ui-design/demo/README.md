@@ -5,29 +5,15 @@ This demo will showcase how easy it can be to create beautiful, interactive cons
 ## Demo Overview
 
 > **Scenario**  
-> We're going to take docker, a common command line tool and automate some of the tasks we may like to help others with. We can build a small wizard with the functionality below.  
-> We will also interact with a web API to get details for some container images we may want to preview on the command line.
+> We're going to take docker, a common command line tool and automate some of the tasks we may like to help others with.
+> We can start with building a small wizard using Spectre Console widgets.  
+> Then we can build some more advanced TUI features with Spectre Console layouts and live rendering.
 
-1. Writing some header text with `Write-SpectreFigletText`
-2. Horizontal rules and panels with `Write-SpectreRule`
-3. Tables for container details with `Format-SpectreTable`
-4. Selecting action with `Read-SpectreSelection` 
-5. Selecting multiple containers with `Read-SpectreMultiSelection`
-6. Wait spinner for stop/starting containers with `Invoke-SpectreCommandWithStatus`
-7. Layout for logs with `New-SpectreLayout`
-8. Live tailing log data with our layout and `Invoke-SpectreLive`
-9. Browsing the docker api to show a list of images we could pull:
-   - Get popular container images.
-   - Display the images in a table.
-   - Show the logo for each on the left side of the table.
-   - Show the name of the image with `Write-SpectreHost -PassThru` with a link to the image.
-   - Show the star count for each image.
-   - Show the download count for each image.
-10. Provide a list of the images with `Read-SpectreSelection` and when selected, pull the image using `docker pull`.
-
-The docker api endpoints to use:
- - Get popular images with https://hub.docker.com/v2/repositories/library/?page=1&page_size=10
- - Get the logo urls for each container image https://hub.docker.com/api/media/repos_logo/v1/{urlencoded_repo_name}, then use this url with `Get-SpectreImage`.
+1. Writing a fancy header.
+2. Selecting an action with `Read-SpectreSelection` that returns complex objects.
+3. List container details with `Format-SpectreTable`.
+4. Start and stop containers with `Read-SpectreMultiSelection` and wait for their execution with `Invoke-SpectreCommandWithStatus`.
+5. Tail container logs with layouts via `New-SpectreLayout`, live updating with `Invoke-SpectreLive`, and using `Get-SpectreLayoutSizes` to fit dynamic content to layout panels.
 
 ## Closing
 
