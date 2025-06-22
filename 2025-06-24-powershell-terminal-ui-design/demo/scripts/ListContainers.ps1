@@ -1,3 +1,5 @@
+$dockerProcesses = docker ps -a --format json | ConvertFrom-Json
+
 function Format-DockerState {
     param (
         [string]$State
@@ -9,8 +11,6 @@ function Format-DockerState {
         default { return "[yellow]$State[/]" }
     }
 }
-
-$dockerProcesses = docker ps -a --format json | ConvertFrom-Json
 
 $dockerProcesses | ForEach-Object {
     [ordered]@{

@@ -15,7 +15,7 @@ $root = New-SpectreLayout -Name "root" -Rows @(
 # Update the title
 $root["title"].Update((
   "Tailing logs for [blue]$($targetContainer.Names)[/]" | Format-SpectreAligned -HorizontalAlignment Center -VerticalAlignment Middle | Format-SpectrePanel -Expand
-))
+)) | Out-Null
 
 function Get-DockerLogs {
   param (
@@ -61,13 +61,10 @@ Invoke-SpectreLive -Data $root -ScriptBlock {
   while ($true) {
     $layoutSize = Get-SpectreLayoutSizes -Layout $root
     $logsHeight = $layoutSize["logs"].Height - 3 # subtract 2 for border and 1 for final line
-    $logWidth = $layoutSize["logs"].Width - 10 # subtract 2 for border
+    $logWidth = $layoutSize["logs"].Width - 10 # subtract 2 for border, 10 for luck
   
     # Get the docker logs for the selected container
     $logs = Get-DockerLogs -ContainerId $targetContainer.ID -Lines $logsHeight -MaxWidth $logWidth
-  
-    # Add a final line with a note to press Ctrl+C to stop
-    $logs += "Press [red]S[/] to stop tailing logs."
 
     $root["logs"].Update((
      $logs | Format-SpectreRows | Format-SpectrePanel -Expand
