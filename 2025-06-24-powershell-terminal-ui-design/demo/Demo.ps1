@@ -1,5 +1,5 @@
 # Load an image
-$containerImage = Get-SpectreImage .\images\ship.png -MaxWidth ($Host.UI.RawUI.WindowSize.Width / 3)
+$containerImage = Get-SpectreImage .\images\ship.png -MaxWidth ($Host.UI.RawUI.WindowSize.Width / 4)
 
 # Load a custom font for a title
 $figlet = Write-SpectreFigletText "Containerz" -PassThru -FigletFontPath .\fonts\3d.flf
