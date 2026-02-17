@@ -1,6 +1,6 @@
 # What is an AST?
 
-Present very short background on AST using PowerShell in Windows Terminal.
+Present very short background on Abstract Syntax Trees (AST) using a PowerShell in Windows Terminal.
 
 1. Write a hello world function with an branching condition.
    ```pwsh
@@ -15,20 +15,23 @@ Present very short background on AST using PowerShell in Windows Terminal.
 2. Use `Get-Command` to get the command info object.
 3. Use `Format-SpectreAst` to show the AST.
 
-Explain how the AST represents the structure of the code, and how we can analyze it to find patterns. We used to have to have an understanding of programming language design and compiler theory to do this, but now we have tools that make it much more accessible.
+The AST represents the structure of the code, and we can analyze it to find patterns. We used to require an understanding of programming language design and compiler theory to do this, but now we have tools that make it much more accessible.
 
 # What is an Analyzer?
 
-1. Explain that this is a basic example of an "enterprise codebase" with multiple domains and some common issues.
-2. Show how the analyzers parse the code into an AST and look for specific patterns and we don't need to fully understand the AST to implement them.
+A metaprogramming tool that parses code into an AST and looks for specific patterns to enforce coding standards, architectural principles, or best practices. It can be used to guide AI agents in generating better code and reducing the need for manual review and refactoring.
+
+We're going to use an example of a .NET codebase, but the same concepts apply across languages and ecosystems.
+
+1. Show how the analyzers parse the code into an AST and look for specific patterns and we don't need to fully understand the AST to implement them.
    ```prompt
    Create an analyzer rule that enforces that direct usage of DateTime.Now or DateTime.UtcNow should be replaced with an injected IDateTimeProvider for better testability.
    ```
-3. Show how the analyzers help guide agent output towards better code that requires less manual review and refactoring.
+2. Show how the analyzers help guide agent output towards better code that requires less manual review and refactoring.
    ```prompt
    Add error handling for GetRecentOrdersAsync in the repository, it sometimes fails for some reason.
    ```
-4. Enable the architectural boundary analyzer to prevent cross-domain coupling, and show how the rules aren't just about "is this code correct?" but "is this code following our architectural principles?" This helps a huge amount with scaling greenfield AI development and not just patching legacy code.
+3. Show how the rules aren't just about "is this code correct?" but "is this code following our architectural principles?" This helps a huge amount with scaling greenfield AI development and not just patching legacy code.
 
 # Extras
 

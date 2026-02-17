@@ -68,12 +68,3 @@ query = Language(tspython.language()).query("""
 ## Key Takeaway
 
 **The concept is portable:** Define rules based on syntax patterns, run them at build time, give the AI immediate feedback. The specific tool changes per language, but the approach remains the same.
-
-| Language | Tool | Complexity |
-|----------|------|------------|
-| C# | Roslyn | Medium |
-| Python | ast module | Low |
-| JavaScript/TypeScript | ESLint/Biome | Low |
-| Java | Error Prone / CheckerFramework | Medium |
-| Go | go/ast + analysis | Medium |
-| Any | tree-sitter | Medium |
