@@ -1,6 +1,4 @@
-# Demo Steps
-
-## What is an AST?
+# What is an AST?
 
 Present very short background on AST using PowerShell in Windows Terminal.
 
@@ -19,7 +17,7 @@ Present very short background on AST using PowerShell in Windows Terminal.
 
 Explain how the AST represents the structure of the code, and how we can analyze it to find patterns. We used to have to have an understanding of programming language design and compiler theory to do this, but now we have tools that make it much more accessible.
 
-## How the AST is Used in Analyzers
+# What is an Analyzer?
 
 1. Explain that this is a basic example of an "enterprise codebase" with multiple domains and some common issues.
 2. Show how the analyzers parse the code into an AST and look for specific patterns and we don't need to fully understand the AST to implement them.
@@ -32,7 +30,7 @@ Explain how the AST represents the structure of the code, and how we can analyze
    ```
 4. Enable the architectural boundary analyzer to prevent cross-domain coupling, and show how the rules aren't just about "is this code correct?" but "is this code following our architectural principles?" This helps a huge amount with scaling greenfield AI development and not just patching legacy code.
 
-## Extras
+# Extras
 
 1. Show that this also works for legacy .NET Framework codebases going back to .NET 4.6 which is a decade old now, and that the same concepts apply across languages and ecosystems.
 2. Show that this approach applies to pretty much any language:
