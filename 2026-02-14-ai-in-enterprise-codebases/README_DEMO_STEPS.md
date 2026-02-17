@@ -40,6 +40,7 @@ We're going to use an example of a .NET codebase, but the same concepts apply ac
    - Python's Flake8 and AST module.
      ```pwsh
      cd ./demo/Analyzers/OtherLanguages/python
+     pipenv shell
      flake8 app.py
      ```
    - Biome with GritQL 🤮 for TypeScript.
