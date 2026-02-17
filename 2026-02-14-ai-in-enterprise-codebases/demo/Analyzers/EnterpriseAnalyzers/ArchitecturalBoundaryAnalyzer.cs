@@ -19,7 +19,7 @@
 
 //     private static readonly LocalizableString Title = "Cross-domain boundary violation";
 //     private static readonly LocalizableString MessageFormat = 
-//         "'{0}' domain should not directly access '{1}' from '{2}' domain. Use dependency injection or domain events instead.";
+//         "'{0}' domain should not directly access '{1}' from '{2}' domain. Use events or service calls into the related domain instead.";
 //     private static readonly LocalizableString Description = 
 //         "Direct access across domain boundaries creates tight coupling. Each domain should be loosely coupled.";
 //     private const string Category = "Architecture";
