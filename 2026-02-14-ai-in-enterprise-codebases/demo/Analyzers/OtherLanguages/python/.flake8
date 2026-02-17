@@ -1,0 +1,15 @@
+[flake8]
+# Enable our custom enterprise checks
+enable-extensions = ENT4
+max-line-length = 200
+exclude = 
+    .git,
+    __pycache__,
+    venv,
+    .venv
+
+# Standard flake8 checks + our custom ones
+select = E,W,F,C,N,ENT4
+
+# Ignore some standard checks that might conflict with our style
+ignore = E501, W503

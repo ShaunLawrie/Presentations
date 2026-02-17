@@ -1,0 +1,4 @@
+{
+  "dotnet.solution.autoOpen": "./EnterpriseSample.sln",
+  "biome.lsp.bin": "./demo/DotnetWeb/ClientApp/node_modules/@biomejs/cli-win32-x64/biome.exe",
+}

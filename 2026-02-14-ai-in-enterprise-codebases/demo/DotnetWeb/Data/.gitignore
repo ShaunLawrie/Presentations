@@ -1,0 +1,8 @@
+# Sample Library Data
+
+SQLite database files for the enterprise sample application.
+
+- `enterprise_orders.db` - Orders domain database
+- `enterprise_billing.db` - Billing domain database
+
+These files are auto-generated on first run.

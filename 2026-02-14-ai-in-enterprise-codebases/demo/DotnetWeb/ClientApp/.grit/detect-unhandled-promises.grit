@@ -1,0 +1,10 @@
+engine biome(2.0)
+language js(typescript, jsx)
+
+// ENT503: Detect fetch calls without proper error handling
+or {
+  `fetch($url).then($handler)` as $promise where {
+    $promise <: not `$_.catch($_)`,
+    register_diagnostic(span=$promise, message="ENT503: Promise chain should include .catch() for error handling", severity="error")
+  }
+}

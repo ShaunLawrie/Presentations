@@ -4,6 +4,9 @@ This presentation is for AI Tinkerers Chicago, to talk about the struggles of us
 
 The presentation is a 5 minute lightning talk so the majority of the introduction and other techniques detailed in the outline will be very quickly glossed over so the demo can start as soon as possible, but I wanted to include them in the outline to give some context to the problem and other techniques that can be used to help improve the quality of AI-generated code.
 
+TODO:
+2. Step through demo flow with timer.
+
 # Outline
 
 ## Introduction
@@ -29,7 +32,7 @@ Shifting the context to be as close to the point in which its useful as possible
 
 We're missing a middle ground here though, what we're going to get is code that compiles and passes tests, but it may not meet the required standards for maintainability, readability, or security. This is where AST-based rules can come in to help us enforce coding standards and best practices in AI-generated code. Standards are deterministic by nature
 
-## Demo: AST-based Rules for C# Codebases
+## Demo: AST-based Rules
 
 This is where the demo will start, and I'll be showing how to implement AST-based rules for a C# codebase, and how it can help improve the quality of AI-generated code. I'll be covering:
 
@@ -41,19 +44,7 @@ This is where the demo will start, and I'll be showing how to implement AST-base
 
 ## Outro
 
-### Key Takeaways
-
 - AI in greenfield projects can be fun but a lot of us have to deal with legacy codebases, and AI can be a powerful tool to help us maintain and improve those codebases, but it comes with its own set of challenges.
 - Using AST-based rules can help us enforce coding standards and best practices in AI-generated code, and improve the reliability and maintainability of our codebases giving us fewer things to worry about when using AI to generate code.
 - Rulesets are portable, if you have generic rules you can use these across different projects and teams, and they can be a great way to share best practices and standards across an organization.
 - I'm very interested in hearing about other people's experiences with using AI in enterprise organisations, and any techniques or tools they've found helpful for improving the quality of AI-generated code.
-
-### Resources
-
-This repository contains all the demo code used in the presentation.
-
-| Language | AST Library/Tool | Description |
-|----------|------------------|-------------|
-| C#       | Roslyn           | A powerful compiler platform that provides APIs for analyzing and manipulating C# code. It allows you to create custom analyzers and code fixes to enforce coding standards and best practices. |
-
-TODO: Add more languages and tools to the table.

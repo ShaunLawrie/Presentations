@@ -1,0 +1,14 @@
+engine biome(2.0)
+language js(typescript, jsx)
+
+// ENT501: Detect Date.now() usage
+// Similar to ENT001 for C# - enforce dependency injection for time
+
+or {
+  `Date.now()` as $call where {
+    register_diagnostic(span=$call, message="ENT501: Use injected clock service instead of Date.now()", severity="error")
+  },
+  `new Date()` as $call where {
+    register_diagnostic(span=$call, message="ENT501: Use injected clock service instead of new Date()", severity="error")
+  }
+}

@@ -1,0 +1,17 @@
+engine biome(2.0)
+language js(typescript, jsx)
+
+// ENT502: Detect hardcoded API URLs
+// Similar to ENT004 for C# - connection strings should be configurable
+
+or {
+  `fetch($url)` where {
+    $url <: r"https?://",
+    $url <: not `"/api/$_"`,
+    register_diagnostic(span=$url, message="ENT502: Use environment configuration for API URLs, not hardcoded strings", severity="error")
+  },
+  `$axios.get($url)` where {
+    $url <: r"https?://",
+    register_diagnostic(span=$url, message="ENT502: Use environment configuration for API URLs with axios", severity="error")
+  }
+}
