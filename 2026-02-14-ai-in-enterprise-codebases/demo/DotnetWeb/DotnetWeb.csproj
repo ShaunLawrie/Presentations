@@ -16,10 +16,10 @@
                       OutputItemType="Analyzer" 
                       ReferenceOutputAssembly="false" />
   </ItemGroup>
-
+  <!-- disable for demo speed
+  
   <Target Name="CheckForNpm" BeforeTargets="Build">
-    <!-- Check if npm is available -->
-    <Exec Command="npm --version" ContinueOnError="true">
+    <Exec Command="npm -v" ContinueOnError="true">
       <Output TaskParameter="ExitCode" PropertyName="NpmExitCode" />
     </Exec>
     <Error Condition="'$(NpmExitCode)' != '0'" Text="npm is not available. Please install Node.js from https://nodejs.org/" />
@@ -39,5 +39,6 @@
     <Message Importance="high" Text="Cleaning React build output..." />
     <RemoveDir Directories="$(SpaRoot)dist;wwwroot\dist" />
   </Target>
+  -->
 
 </Project>

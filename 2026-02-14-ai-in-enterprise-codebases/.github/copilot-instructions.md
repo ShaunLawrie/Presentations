@@ -1,6 +1,6 @@
 # Writing Code
 
-Always ensure that warnings and errors are clean after making changes, you should use `dotnet build` to check for issues.
+Always ensure that warnings and errors are clean after making changes, you should use `dotnet build --property:NoWarn=NU1900%3BENT001%3BENT003` to check for issues, this ignores a couple of errors I don't want polluting my demo.
 
 # Error Handling
 
