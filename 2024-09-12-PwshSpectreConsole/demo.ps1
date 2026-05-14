@@ -5,7 +5,7 @@ Set-SpectreColors -AccentColor $accentColor
 
 Get-F1Logo | Format-SpectrePanel -Color White -Expand
 
-$meetings = Get-F1Meetings
+$meetings = Get-F1Meetings | Group-Object -Property meeting_name | ForEach-Object { $_.Group[0] } | Sort-Object -Property date_start
 Write-SpectreHost ""
 $selectedMeeting = Read-SpectreSelection -Title "What session are you interested in?" -Choices $meetings -ChoiceLabelProperty meeting_name
 
@@ -20,7 +20,7 @@ $selectedSession = Read-SpectreSelection -Title "What session are you interested
 
 Write-SpectreHost "You selected session [$accentColor]$($selectedSession.session_name)[/] for meeting [$accentColor]$($selectedMeeting.meeting_name)[/]."
 
-$teams = Get-F1SessionDrivers -SessionKey 9488 $selectedSession.session_key | Group-Object -Property team_name
+$teams = Get-F1SessionDrivers -SessionKey $selectedSession.session_key | Group-Object -Property team_name
 
 Write-SpectreHost ""
 Write-SpectreRule "Race Details"
@@ -190,8 +190,13 @@ function Get-PedalsRows {
 function Get-GearRows {
   param (
     [int] $gear,
-    [bool] $drs
+    [object] $drs
   )
+
+  # No DRS in 2026 :(
+  if ($null -eq $drs) {
+    $drs = -1
+  }
   
   $drsLabel = switch ($drs) {
     8 { "DRS: [white on orange1] Ready [/]" }
