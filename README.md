@@ -4,9 +4,9 @@ Sometimes I talk about things and need slides/demos. I keep them here.
 
 ## Talks
 
-- [New York PowerShell Meetup - From Intimidation To Interaction](./2023-07-23-FromIntimidationToInteraction/README.md)
-- [Code Camp Talk 2024 - Gaming PowerShell for Fun and Profit](./2024-04-15-GamingPowerShellForFunAndProfit/README.md)
-- [Pacific PowerShell User Group - PwshSpectreConsole](./2024-09-12-PwshSpectreConsole/README.md)
+- [New York PowerShell Meetup - From Intimidation To Interaction](./2023-07-23-from-intimidation-to-interaction/README.md)
+- [Code Camp Talk 2024 - Gaming PowerShell for Fun and Profit](./2024-04-15-gaming-powershell-for-fun-and-profit/README.md)
+- [Pacific PowerShell User Group - PwshSpectreConsole](./2024-09-12-pwshspectreconsole/README.md)
 - [PowerShell Conference EU 2025 - Automagical Documentation](./2025-06-24-automagical-documentation/README.md)
 - [PowerShell Conference EU 2025 - PowerShell Terminal UI Design](./2025-06-24-powershell-terminal-ui-design/README.md)
 - [AI in Enterprise Codebases - AI Tinkerers Chicago](./2026-02-14-ai-in-enterprise-codebases/README.md)
