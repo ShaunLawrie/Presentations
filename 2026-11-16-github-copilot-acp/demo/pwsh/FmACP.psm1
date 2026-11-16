@@ -37,7 +37,7 @@ function Connect-AcpAgent {
         [int]$Port,
         [Parameter(ParameterSetName = 'Tcp')]
         [string]$AgentHost = '127.0.0.1',
-        [ValidateSet('Allow', 'Reject')]
+        [ValidateSet('Allow', 'Reject', 'Prompt')]
         [string]$PermissionPolicy = 'Allow',
         [int]$InitializeTimeoutSeconds = 30
     )
@@ -137,8 +137,9 @@ function Connect-AcpAgent {
     $connection.AgentInfo = $init.result
 
     # Agents that require login advertise authMethods; ACP expects the client
-    # to pick one and call authenticate before opening sessions.
-    $authMethods = @($init.result.authMethods)
+    # to pick one and call authenticate before opening sessions. Guard against
+    # missing/empty entries (@($null) traps included).
+    $authMethods = @($init.result.authMethods) | Where-Object { $_ -and $_.PSObject.Properties['id'] -and $_.id }
     if ($authMethods.Count -gt 0) {
         $methodId = $authMethods[0].id
         try {
@@ -600,6 +601,37 @@ function Receive-AcpUpdateLine {
         return $false
     }
     $notification = $line | ConvertFrom-Json
+
+    if ($notification.method -eq 'session/request_permission') {
+        # Prompt policy: the request was parked here by the reader loop and the
+        # agent is blocked until we answer.
+        $request = $notification.params
+        $options = @($request.options)
+        Write-Host "`n[permission] $($request.toolCall.title) [$($request.toolCall.kind)]" -ForegroundColor Magenta
+        for ($index = 0; $index -lt $options.Count; $index += 1) {
+            Write-Host ("  [{0}] {1} ({2})" -f ($index + 1), $options[$index].name, $options[$index].kind) -ForegroundColor Magenta
+        }
+        $choice = Read-Host "Choose 1-$($options.Count) (default 1)"
+        $picked = 0
+        if ([int]::TryParse($choice, [ref]$picked) -and $picked -ge 1 -and $picked -le $options.Count) {
+            $picked -= 1
+        } else {
+            $picked = 0
+        }
+        $optionId = $options[$picked].optionId
+        $reply = @{
+            jsonrpc = '2.0'
+            id = $notification.id
+            result = @{ outcome = @{ outcome = 'selected'; optionId = $optionId } }
+        } | ConvertTo-Json -Compress -Depth 8
+        [System.Threading.Monitor]::Enter($Connection.State.SendLock)
+        try { $Connection.Writer.WriteLine($reply) } finally {
+            [System.Threading.Monitor]::Exit($Connection.State.SendLock)
+        }
+        Write-Host "[permission] chose: $($options[$picked].name)" -ForegroundColor Magenta
+        return $true
+    }
+
     $update = $notification.params.update
     $null = $Updates.Add($update)
     if ($update.sessionUpdate -eq 'current_mode_update') {
@@ -670,9 +702,54 @@ function Start-AcpReaderLoop {
                 }
 
                 if ($hasRequestId -and $method -eq 'session/request_permission') {
-                    $optionId = if ($state['PermissionPolicy'] -eq 'Allow') { 'allow' } else { 'reject' }
-                    $reply = '{"jsonrpc":"2.0","id":' + $requestId +
-                        ',"result":{"outcome":{"outcome":"selected","optionId":"' + $optionId + '"}}}'
+                    if ($state['PermissionPolicy'] -eq 'Prompt') {
+                        # Park the request for the main thread to answer
+                        # interactively (the agent blocks until it is replied).
+                        $state['Queue'].Enqueue($line)
+                        continue
+                    }
+                    # Pick the optionId from the options the agent actually
+                    # offered, preferring once over always.
+                    $optionId = ''
+                    try {
+                        $options = $root.GetProperty('params').GetProperty('options')
+                        $prefix = if ($state['PermissionPolicy'] -eq 'Allow') { 'allow' } else { 'reject' }
+                        foreach ($preferred in @("${prefix}_once", "${prefix}_always")) {
+                            if ($optionId) { break }
+                            foreach ($option in $options.EnumerateArray()) {
+                                $optionKind = ''
+                                $candidate = ''
+                                try { $optionKind = $option.GetProperty('kind').GetString() } catch { }
+                                try { $candidate = $option.GetProperty('optionId').GetString() } catch { }
+                                if ($optionKind -eq $preferred -and $candidate) {
+                                    $optionId = $candidate
+                                    break
+                                }
+                            }
+                        }
+                        if (-not $optionId) {
+                            foreach ($option in $options.EnumerateArray()) {
+                                $optionKind = ''
+                                $candidate = ''
+                                try { $optionKind = $option.GetProperty('kind').GetString() } catch { }
+                                try { $candidate = $option.GetProperty('optionId').GetString() } catch { }
+                                if ($optionKind.StartsWith($prefix) -and $candidate) {
+                                    $optionId = $candidate
+                                    break
+                                }
+                            }
+                        }
+                    } catch {
+                        $optionId = ''
+                    }
+
+                    $reply = '{"jsonrpc":"2.0","id":' + $requestId + ','
+                    if ($optionId) {
+                        $reply += '"result":{"outcome":{"outcome":"selected","optionId":"' + $optionId + '"}}}'
+                    } else {
+                        # No usable option for this policy: dismiss the request.
+                        $reply += '"result":{"outcome":{"outcome":"cancelled"}}}'
+                    }
                     [System.Threading.Monitor]::Enter($state['SendLock'])
                     try { $writer.WriteLine($reply) } finally {
                         [System.Threading.Monitor]::Exit($state['SendLock'])
