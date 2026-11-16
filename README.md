@@ -10,6 +10,6 @@ Sometimes I talk about things and need slides/demos. I keep them here.
 - [PowerShell Conference EU 2025 - Automagical Documentation](./2025-06-24-automagical-documentation/README.md)
 - [PowerShell Conference EU 2025 - PowerShell Terminal UI Design](./2025-06-24-powershell-terminal-ui-design/README.md)
 - [AI in Enterprise Codebases - AI Tinkerers Chicago](./2026-02-14-ai-in-enterprise-codebases/README.md)
-- [GitHub Copilot and ACP](./2026-11-16-github-copilot-acp/README.md)
+- [GitHub Copilot and ACP - Microsoft Dev Days Melbourne](./2026-11-16-github-copilot-acp/README.md)
 
 ![image](https://github.com/user-attachments/assets/1d1b84e1-7112-45ac-be80-352b19bd7bd2)
