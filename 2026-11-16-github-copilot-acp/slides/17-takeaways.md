@@ -8,4 +8,4 @@ ACP is just an option.
 
 **ACP:** build a client around a shared agent interface
 
-**Key takeaway:** choose the integration that best fits your workflow and security requirements. ACP provides flexibility and isolation, but may require more setup compared to direct CLI usage or embedding the Copilot SDK.
+<p class="aside">Choose the integration that best fits your workflow and security requirements. ACP provides flexibility and isolation, but may require more setup compared to direct CLI usage or embedding the Copilot SDK.</p>
