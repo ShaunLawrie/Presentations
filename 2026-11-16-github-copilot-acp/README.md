@@ -49,6 +49,7 @@ Local sandboxes require usable `/dev/kvm` access and nested virtualization on
 the host. An Ubuntu container and Docker Engine alone do not provide KVM.
 The startup script grants the container's `kvm` group access to the exposed
 KVM device on each start; the `vscode` user belongs to that group.
+It also starts the sandbox daemon with Docker's balanced network policy.
 If the Codespace host does not expose KVM, run the local sandbox demo on a
 KVM-capable Ubuntu machine, or use
 [Docker cloud sandboxes](https://docs.docker.com/ai/sandboxes/cloud/)

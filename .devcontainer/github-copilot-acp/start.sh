@@ -8,6 +8,8 @@ if [[ -c /dev/kvm ]]; then
   sudo chmod g+rw /dev/kvm
 fi
 
+sbx daemon start --detach --policy balanced
+
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 cd "$script_dir/../../2026-11-16-github-copilot-acp"
 
