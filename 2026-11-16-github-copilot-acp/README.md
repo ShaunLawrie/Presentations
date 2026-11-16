@@ -1,60 +1,97 @@
 # GitHub Copilot and ACP
 
-A roughly 20-30-minute, demo-led draft for developers familiar with Copilot about the ACP functionality and potential use-cases.
+A roughly 20-30-minute, demo-led draft for developers familiar with Copilot about the ACP functionality in the copilot CLI and potential use-cases.
+
+![Presenting at PwC Melbourne](B9D92D19-455F-4464-A5AC-B07753098DBF_1_201_a.jpeg)
 
 ## Present
 
-With Node.js 22.13+ and npm installed, run these commands in this directory to start the slidev presentation:
+Run these commands in this directory to start the slidev presentation:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-## Present from GitHub Codespaces
+## Slides
 
-Create a Codespace for this repository and select the **GitHub Copilot ACP
-presentation** configuration. It uses Ubuntu 24.04 and installs Node.js 22,
-PowerShell, Copilot CLI, Docker Engine, Docker Sandboxes (`sbx`), and the slide
-dependencies, then starts Slidev automatically on port **3030**.
-Open that port from the **Ports** tab to present the slides in your browser.
-The forwarded port stays private to your GitHub account.
+1. GitHub Copilot
 
-If you need to restart the slides, run this in the presentation terminal:
+   ![GitHub Copilot](screenshots/01.png)
 
-```sh
-npm run dev:cloud
-```
+2. What is ACP?
 
-Startup output is saved to `/tmp/github-copilot-acp-slidev.log`.
-For the Copilot CLI and PowerShell demos, run `copilot login` in the Codespace
-and authenticate with an account that has Copilot access. Open a PowerShell
-terminal with `pwsh` for the PowerShell client demo.
+   ![What is ACP?](screenshots/02.png)
 
-### Docker Sandboxes
+   [ACP architecture](https://agentclientprotocol.com/get-started/architecture)
 
-The image installs `docker-sbx` from Docker's official Ubuntu apt repository,
-following the [Ubuntu installation instructions](https://docs.docker.com/ai/sandboxes/install/#install-on-ubuntu).
-Sign in and check the installation:
+3. Copilot SDK vs ACP
 
-```sh
-sbx --version
-sbx login
-docker info
-ls -l /dev/kvm
-kvm-ok
-```
+   ![Copilot SDK vs ACP](screenshots/03.png)
 
-Local sandboxes require usable `/dev/kvm` access and nested virtualization on
-the host. An Ubuntu container and Docker Engine alone do not provide KVM.
-The startup script grants the container's `kvm` group access to the exposed
-KVM device on each start; the `vscode` user belongs to that group.
-It also starts the sandbox daemon with Docker's balanced network policy.
-If the Codespace host does not expose KVM, run the local sandbox demo on a
-KVM-capable Ubuntu machine, or use
-[Docker cloud sandboxes](https://docs.docker.com/ai/sandboxes/cloud/)
-with `sbx --cloud` (requires a Docker Agentic Platform subscription).
-Cloud sandboxes have different workspace and authentication requirements;
-the local sandbox demo commands are not interchangeable with cloud commands.
+4. Why ACP when we have the CLI?
 
-Stop the Codespace when finished to avoid using additional compute time.
+   ![Why ACP when we have the CLI?](screenshots/04.png)
+
+5. One ACP conversation
+
+   ![One ACP conversation](screenshots/05.png)
+
+6. CLI and ACP
+
+   ![CLI and ACP](screenshots/06.png)
+
+7. Where does the work execute?
+
+   ![Where does the work execute?](screenshots/07.png)
+
+8. Execution inside a sandbox
+
+   ![Execution inside a sandbox](screenshots/08.png)
+
+9. Control access in the client
+
+   ![Control access in the client](screenshots/09.png)
+
+10. Extend the harness with elicitation
+
+    ![Extend the harness with elicitation](screenshots/10.png)
+
+11. Copilot in Docker Sandboxes
+
+    ![Copilot in Docker Sandboxes](screenshots/11.png)
+
+12. Copilot in a Docker Sandbox
+
+    ![Copilot in a Docker Sandbox](screenshots/12.png)
+
+13. Check the sandbox boundary
+
+    ![Check the sandbox boundary](screenshots/13.png)
+
+14. Other ACP clients
+
+    ![Other ACP clients](screenshots/14.png)
+
+15. Integrate with pipelines
+
+    ![Integrate with pipelines](screenshots/15.png)
+
+16. A Simple PowerShell client
+
+    ![A Simple PowerShell client](screenshots/16.png)
+
+17. Choosing your integration
+
+    ![Choosing your integration](screenshots/17.png)
+
+18. Resources and questions
+
+    ![Resources and questions](screenshots/18.png)
+
+    - [Copilot ACP reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/acp-server)
+    - [ACP protocol and client directory](https://agentclientprotocol.com/get-started/clients)
+    - [Copilot SDK](https://github.com/github/copilot-sdk)
+    - [Docker's Copilot sandbox guide](https://docs.docker.com/ai/sandboxes/agents/copilot/)
+    - [Microsoft walkthrough](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/from-terminal-to-autonomous-coding-mastering-github-copilot-cli-acp-server/4508604)
+    - [GitHub ACP announcement and discussion](https://github.com/orgs/community/discussions/185860)
