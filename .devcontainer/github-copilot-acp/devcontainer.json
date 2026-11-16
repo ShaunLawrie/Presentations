@@ -22,7 +22,7 @@
     }
   },
   "postCreateCommand": "npm ci && npm install --global @github/copilot",
-  "postStartCommand": "nohup npm run dev:cloud </dev/null >/tmp/github-copilot-acp-slidev.log 2>&1 &",
+  "postStartCommand": "bash ../.devcontainer/github-copilot-acp/start.sh",
   "customizations": {
     "vscode": {
       "extensions": ["antfu.slidev", "ms-vscode.PowerShell"]
