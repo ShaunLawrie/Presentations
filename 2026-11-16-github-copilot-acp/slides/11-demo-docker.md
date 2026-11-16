@@ -1,7 +1,7 @@
 # Copilot in a Docker Sandbox
 
 ```sh
-sbx create --name copilot-acp-demo copilot /Users/shaunlawrie/workspace/project
+sbx create --name copilot-acp-demo copilot "$PWD/demo/fixture"
 ```
 
 Then connect an ACP client, like `agent-canvas` to the sandbox:
