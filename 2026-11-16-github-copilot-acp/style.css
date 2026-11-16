@@ -1,0 +1,49 @@
+:root { --slidev-theme-primary: #79c0ff; }
+.slidev-layout {
+  background: #000000;
+  color: #e6edf3;
+  padding: 56px 64px;
+  font-size: 25px;
+  line-height: 1.5;
+}
+.slidev-layout.cover h1 {
+  font-size: 42px!important;
+  margin-bottom: 3px!important;
+}
+.slidev-layout h1 {
+  color: #f0f6fc;
+  font-size: 42px;
+  line-height: 1.15;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+.slidev-layout h2 { font-size: 29px; color: #79c0ff; margin-top: 24px; }
+.slidev-layout p, .slidev-layout li { line-height: 1.5; }
+.slidev-layout li { margin-bottom: 16px; }
+.slidev-layout strong { color: #a5d6ff; }
+.slidev-layout table { font-size: 21px; width: 100%; }
+.slidev-layout th { color: #79c0ff; }
+.slidev-layout td, .slidev-layout th { padding: 14px 12px; border-color: #30363d; }
+.slidev-layout pre { font-size: 19px !important; line-height: 1.45 !important; }
+.slidev-layout.powershell-demo pre { font-size: 13px !important; line-height: 1.35 !important; }
+.slidev-layout a { color: #79c0ff; }
+.slidev-layout.cover p { font-size: 29px; color: #b1bac4; }
+.slidev-layout.cover .social-links { color: #6e7681; font-size: 20px; }
+.slidev-layout.cover .title-image { width: 80%; height: auto; text-align: center; display: block; margin: 0 auto; }
+.slidev-layout .lead { font-size: 32px; margin: 32px 0; }
+.slidev-layout .aside { color: #b1bac4; font-size: 21px; margin-top: 26px; }
+.slidev-layout.resources { font-size: 22px; }
+.slidev-layout.resources li { margin-bottom: 10px; }
+.architecture .architecture-paths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
+.architecture .architecture-paths h2 { font-size: 27px; margin: 0 0 14px; }
+.architecture .architecture-paths p { font-size: 20px; margin-top: 14px; }
+.architecture .architecture-paths .mermaid { height: 260px; display: flex; align-items: center; justify-content: center; }
+.architecture .architecture-paths .mermaid + p { margin-top: 36px; }
+.architecture .architecture-paths svg { max-width: 100%; max-height: 260px; }
+.architecture .aside { margin-top: 20px; }
+.execution-diagram .mermaid { margin: 34px 0; }
+.sandbox-security .mermaid { margin: 24px 0; }
+.sandbox-security .aside { font-size: 21px; }
+.elicitation-example .elicitation-columns { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 34px; margin-top: 18px; }
+.elicitation-example .elicitation-columns p { font-size: 21px; margin: 0 0 18px; }
+.elicitation-example .elicitation-columns pre { margin-bottom: 22px; }

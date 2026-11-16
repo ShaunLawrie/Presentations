@@ -1,0 +1,19 @@
+{
+  "name": "github-copilot-acp-talk",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "slidev slides.md --open",
+    "build": "slidev build slides.md",
+    "export": "slidev export slides.md"
+  },
+  "overrides": {
+    "dompurify": "^3.4.18",
+    "image-size": "^2.1.0"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^53.1.0",
+    "@slidev/theme-default": "^0.25.0",
+    "vue": "^3.5.0"
+  }
+}
