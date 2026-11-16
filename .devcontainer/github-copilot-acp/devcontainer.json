@@ -1,0 +1,23 @@
+{
+  "name": "GitHub Copilot ACP presentation",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "features": {
+    "ghcr.io/devcontainers/features/powershell:1": {}
+  },
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/2026-11-16-github-copilot-acp",
+  "forwardPorts": [3030],
+  "portsAttributes": {
+    "3030": {
+      "label": "GitHub Copilot ACP slides",
+      "onAutoForward": "openBrowser",
+      "visibility": "private"
+    }
+  },
+  "postCreateCommand": "npm ci && npm install --global @github/copilot",
+  "postStartCommand": "nohup npm run dev:cloud </dev/null >/tmp/github-copilot-acp-slidev.log 2>&1 &",
+  "customizations": {
+    "vscode": {
+      "extensions": ["antfu.slidev", "ms-vscode.PowerShell"]
+    }
+  }
+}
